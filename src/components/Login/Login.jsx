@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 const LoginForm = (props) => {
     const styles = useStyles();
 
-    const {register, handleSubmit, errors, setError} = useForm({
+    const {register, handleSubmit, formState: {errors}, setError} = useForm({
         mode: "onBlur",
         resolver: yupResolver(schema),
     })
@@ -90,18 +90,17 @@ const LoginForm = (props) => {
         <Container className={styles.form} maxWidth={'xs'}>
             <div className={styles.logo}>pipl</div>
             <Form column onSubmit={handleSubmit(login)}>
-                <MyLoginInput name={'email'} ref={register} type={'text'} placeholder={'email'}
-                              error={!!errors.email} helperText={errors.email?.message}/>
+                <MyLoginInput type={'text'} placeholder={'email'} error={!!errors.email}
+                              helperText={errors.email?.message} {...register('email')}/>
                 {errors.email && <span className={styles.error}>{errors.email.message}</span>}
-                <MyLoginInput name={'password'} ref={register} type={'password'} placeholder={'password'}
-                              error={!!errors?.password} helperText={errors.password?.message}/>
+                <MyLoginInput type={'password'} placeholder={'password'}
+                              error={!!errors.password} helperText={errors.password?.message} {...register('password')}/>
                 <MultipleButton>
                     {[
                         [<Typography variant={'h5'}>pipin</Typography>, login],
                         [<AddIcon fontSize={'default'} color={'primary'}/>, registration],
                     ]}
                 </MultipleButton>
-                {/*<PrimaryButton>Login</PrimaryButton>*/}
             </Form>
         </Container>
     )

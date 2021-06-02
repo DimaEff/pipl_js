@@ -15,6 +15,8 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import Login from "./components/Login/Login";
 import {initialize} from "./Redux/app_reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import Home from "./components/Home/Home";
+import AppRouter from "./AppRouter";
 
 
 const App = (props) => {
@@ -26,27 +28,23 @@ const App = (props) => {
     if (!props.initialized) return <Preloader/>
 
     if (props.location.pathname === '/login') {
-        return <Login />
+        return <Login/>
     }
 
     return (
         <styles.Wrapper className={'app-wrapper'}>
-
-            {/*<Route exact path={'/login'} render={() => <Login/>}/>*/}
-            <Route path={'/'} render={() => (
-                <>
-                    <HeaderContainer/>
-                    <NavbarContainer/>
-                    <styles.Content>
-                        <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
-                        <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
-                        <Route path={'/users'} render={() => <UsersContainer/>}/>
-                        <Route path={'/news'} component={News}/>
-                        <Route path={'/music'} component={Music}/>
-                        <Route path={'/settings'} component={Settings}/>
-                    </styles.Content>
-                </>
-            )}/>
+            <HeaderContainer/>
+            <NavbarContainer/>
+            <styles.Content>
+                <AppRouter />
+                {/*<Route path={'/'} component={Home} />*/}
+                {/*<Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>*/}
+                {/*<Route path={'/dialogs'} render={() => <DialogsContainer/>}/>*/}
+                {/*<Route path={'/users'} render={() => <UsersContainer/>}/>*/}
+                {/*<Route path={'/news'} component={News}/>*/}
+                {/*<Route path={'/music'} component={Music}/>*/}
+                {/*<Route path={'/settings'} component={Settings}/>*/}
+            </styles.Content>
         </styles.Wrapper>
     );
 }

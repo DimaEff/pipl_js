@@ -2,24 +2,25 @@ import React from 'react';
 import {connect} from "react-redux";
 import {Redirect} from 'react-router-dom';
 
+import {getIsAuth} from "../selectors/auth_selectors";
+import {getLoginRoute} from "../utils/consts";
+
 
 const withAuthRedirect = (Component) => {
 
-    class RedirectComponent extends React.Component {
-        render() {
-            if (!this.props.isLogin) return <Redirect to={'login'} />;
+    const RedirectComponent = ({isAuth, match, ...props}) => {
+        if (!isAuth) return <Redirect to={getLoginRoute()}/>;
 
-            return <Component {...this.props}/>;
-        }
+        return <Component {...props}/>;
     }
 
     const mapStateToProps = (state) => {
         return {
-            isLogin: state.auth.isLogin,
+            isAuth: getIsAuth(state),
         }
     }
 
-    return connect(mapStateToProps, {})(RedirectComponent)
+    return connect(mapStateToProps, {})(RedirectComponent);
 };
 
 export default withAuthRedirect;

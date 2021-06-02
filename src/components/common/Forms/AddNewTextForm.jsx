@@ -6,7 +6,6 @@ import AddSharpIcon from '@material-ui/icons/AddSharp';
 
 import Form from "./FormsComponents/Form";
 import TextArea from "./FormsComponents/TextArea";
-import TextIconButton from "../Buttons/TextIconButton";
 import PrimaryButton from "../Buttons/PrimaryButton";
 
 
@@ -15,7 +14,7 @@ const schema = yup.object().shape({
 })
 
 const AddNewTextForm = (props) => {
-    const {register, handleSubmit, errors} = useForm({
+    const {register, handleSubmit, formState: {errors}} = useForm({
         mode: 'onBlur',
         resolver: yupResolver(schema),
     })
@@ -23,8 +22,8 @@ const AddNewTextForm = (props) => {
     return (
         <div>
             <Form onSubmit={handleSubmit(props.onSubmit)}>
-                <TextArea name={'newTextField'} ref={register}  error={errors.newTextField}
-                          helperText={errors?.newTextField?.message} {...props}/>
+                <TextArea error={errors.newTextField} helperText={errors.newTextField?.message}
+                          {...register('newTextField')} {...props}/>
                 <PrimaryButton>
                     {props.icon || <AddSharpIcon/>}
                 </PrimaryButton>

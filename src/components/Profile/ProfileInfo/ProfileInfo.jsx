@@ -16,7 +16,10 @@ const ProfileInfo = (props) => {
                         name={props.profile.fullName}
                         noLink
                 />
-                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+                <ProfileStatus status={props.status}
+                               isMyProfile={props.isMyProfile}
+                               updateUserStatus={props.updateUserStatus}
+                />
             </div>
         </styles.ProfileInfo>
     );

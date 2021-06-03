@@ -1,24 +1,38 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {useParams} from "react-router";
+import {Redirect, useHistory} from "react-router-dom";
 
 import Profile from "./Profile";
 import {addPost, getUserProfile, getUserStatus, updateUserStatus} from "../../Redux/profile_reducer";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {getPosts, getProfile, getUserStatusFromState} from "../../selectors/profile_selector";
 import {getIsAuth, getMyInformation} from "../../selectors/auth_selectors";
+import {getProfileRoute} from "../../utils/consts";
 
 
 let ProfileContainer = (props) => {
     const {userId} = useParams();
+    const history = useHistory();
+    const [isMyProfile, setIsMyProfile] = useState(false);
 
     useEffect(() => {
-        props.getUserProfile(userId || props.myUserId);
-        props.getUserStatus(userId || props.myUserId);
-    }, [userId])
+        if (!userId) history.push(getProfileRoute(props.myUserId))
+        props.getUserProfile(userId);
+        props.getUserStatus(userId);
+    }, [userId, props.myUserId])
 
-    return <Profile {...props}/>
+    useEffect(() => {
+        if (userId == props.myUserId) {
+            setIsMyProfile(true);
+        } else  {
+            setIsMyProfile(false);
+        }
+    }, [userId, props.myUserId, setIsMyProfile]);
+
+
+    return <Profile isMyProfile={isMyProfile} {...props}/>
 }
 
 let mapStateToProps = (state) => {

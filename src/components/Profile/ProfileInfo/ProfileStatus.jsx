@@ -1,38 +1,34 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 import * as styles from './ProfileInfoStyles';
 
 
-const ProfileStatus = (props) => {
-    let [editMode, setEditMode] = useState(false);
-    let [status, setStatus] = useState(props.status);
+const ProfileStatus = ({status, isMyProfile, updateUserStatus}) => {
+    const [editMode, setEditMode] = useState(false);
+    const [userStatus, setUserStatus] = useState(status);
 
-    useEffect(() => {
-        if (status !== props.status) status = props.status;
-    });
-
-    let activateEditMode = () => {
-        setEditMode(editMode = true);
+    const activateEditMode = () => {
+        isMyProfile && setEditMode(true);
     }
 
-    let disableEditMode = (e) => {
-        setEditMode(editMode = false);
-        props.updateUserStatus(e.target.value);
+    const disableEditMode = (e) => {
+        setEditMode(false);
+        updateUserStatus(e.target.value);
     }
 
-    let onChangeStatusField = (e) => {
-        setStatus(e.target.value);
+    const onChangeStatusField = (e) => {
+        setUserStatus(e.target.value);
     }
 
     return (
         <styles.Status>
             {editMode ?
-                <textarea value={status}
+                <textarea value={userStatus}
                           autoFocus={true}
                           onChange={onChangeStatusField}
                           onBlur={disableEditMode}
                 />:
-                <span onDoubleClick={activateEditMode}>{props.status || '------'}</span>
+                <span onDoubleClick={activateEditMode}>{status || '-'.repeat(6)}</span>
             }
         </styles.Status>
     );

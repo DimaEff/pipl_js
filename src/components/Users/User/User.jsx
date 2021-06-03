@@ -23,11 +23,11 @@ const User = (props) => {
                         name={props.name}
                         circle
                 />
-                <div>
-                    <button disabled={!props.isAuth || userInProgress()} onClick={onToggleFollow}>
-                        {props.followed ? 'Unfollow': 'Follow'}
+                {props.isAuth && <div>
+                    <button disabled={userInProgress()} onClick={onToggleFollow}>
+                        {props.followed ? 'Unfollow' : 'Follow'}
                     </button>
-                </div>
+                </div>}
             </styles.AvatarNameButton>
             <styles.Description>
                 <div>

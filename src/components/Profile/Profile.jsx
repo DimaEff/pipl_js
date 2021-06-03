@@ -8,11 +8,16 @@ import Preloader from "../common/Preloader/Preloader";
 
 const Profile = (props) => {
 
+
     if (!props.profile) return <Preloader />
 
     return (
         <styles.Profile>
-            <ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}/>
+            <ProfileInfo profile={props.profile}
+                         status={props.status}
+                         isMyProfile={props.isMyProfile}
+                         updateUserStatus={props.updateUserStatus}
+            />
             <MyPosts posts={props.posts}
                      postField={props.postField}
                      addPost={props.addPost}

@@ -2,8 +2,9 @@ import React from 'react';
 import {makeStyles} from "@material-ui/core";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
+import * as yup from 'yup';
 
-import Input from "./Input";
+import Input from "./FormsComponents/Input";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,16 +23,20 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Form = ({children, onSubmit, ...props}) => {
+const Form = ({children, submitFunction, ...props}) => {
     const styles = useStyles(props);
 
-    const {register, handleSubmit, formState: {errors}} = useForm({
+    const {register, handleSubmit, reset, setError, formState: {errors}} = useForm({
         mode: "onBlur",
-        resolver: yupResolver(props.schema),
+        resolver: yupResolver(props.schema || yup.object()),
     });
 
-    const [fields, buttons] = [...children];
+    const [fields, buttons] = children;
     const InputComponent = props.inputComponent || Input;
+
+    const onSubmit = (formData) => {
+        submitFunction(formData, {reset, setError});
+    }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>

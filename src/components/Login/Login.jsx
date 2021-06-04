@@ -2,11 +2,11 @@ import React from 'react';
 import {connect} from "react-redux";
 import * as yup from 'yup';
 import {Redirect} from "react-router-dom";
-import {Container, makeStyles} from "@material-ui/core";
+import {ButtonGroup, Container, makeStyles} from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 
 import {logIn, logOut} from "../../Redux/auth_reducer";
-import Form from "../common/Forms/FormsComponents/Form";
+import Form from "../common/Forms/Form";
 import piplImg from '../../assets/images/pipl.jpg'
 import OvalButtons from "../common/Buttons/OvalButtons";
 import {getIsAuth} from "../../selectors/auth_selectors";
@@ -14,8 +14,8 @@ import OvalInput from "../common/Forms/FormsComponents/OvalInput";
 
 
 const schema = yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup.string().min(6).max(15).required(),
+    email: yup.string().required().email(),
+    password: yup.string().required().min(6).max(15),
 })
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
         resize: 'both',
         overflow: 'hidden', /* Для интерактивного изменения размера. Необязательно */
-        backgroundSize: 'auto 100%',
+        backgroundSize: 'cover',
         backgroundImage: `url(${piplImg})`,
         display: 'flex',
         justifyContent: 'center',
@@ -65,14 +65,13 @@ const useStyles = makeStyles((theme) => ({
 const LoginForm = (props) => {
     const styles = useStyles();
 
-    const login = async (formData) => {
-        const promise = props.logIn(formData.email, formData.password);
-        // const response = await Promise.all([promise]);
+    const login = async (formData, {setError}) => {
+        const response = await props.logIn(formData.email, formData.password);
 
-        // setError("email", {
-        //     type: "manual",
-        //     message: response,
-        // })
+        setError("password", {
+            type: "manual",
+            message: response[0],
+        })
     }
 
     const registration = () => {
@@ -82,18 +81,19 @@ const LoginForm = (props) => {
     return (
         <Container className={styles.form} maxWidth={'xs'}>
             <div className={styles.logo}>pipl</div>
-            <Form schema={schema} onSubmit={login} inputComponent={OvalInput}>
+            <Form schema={schema} submitFunction={login} inputComponent={OvalInput}>
                 {[
                     {name: 'email'},
                     {name: 'password', type: 'password'},
                 ]}
-                <OvalButtons>
-                    {[
-                    {name: 'pipin', type: 'submit'},
-                    {name: <AddIcon fontSize={'default'} color={'primary'}/>, action: registration},
-                    ]}
-                </OvalButtons>
-                {/*<button type={'submit'}>login</button>*/}
+                <ButtonGroup variant="contained" color="primary">
+                    <OvalButtons>
+                        {[
+                            {name: 'pipin', type: 'submit'},
+                            {name: <AddIcon color={'primary'}/>, action: registration},
+                        ]}
+                    </OvalButtons>
+                </ButtonGroup>
             </Form>
         </Container>
     )

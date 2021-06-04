@@ -1,37 +1,33 @@
 import React from 'react';
 
 import styles from "./AddPostStyles";
-import AddNewTextForm, {TestAddNewTextForm} from "../../../common/Forms/AddNewTextForm";
-import {useForm} from "react-hook-form";
+import Form from "../../../common/Forms/Form";
+import TextArea from "../../../common/Forms/FormsComponents/TextArea";
+import {Typography} from "@material-ui/core";
 
 
-const AddPostForm = (props) => {
+// AddMessage и AddPost очень похожи, но я не знаю, надо ли делать из них один или типо того
+// Скорее всего, попозже подумаю и объединю
+// Абсолютно точно попозже объединю. Сейчас немного лень(0:50)
+const AddPost = ({addPost}) => {
 
-    let addPost = (data, e) => {
-        props.addPost(data.newTextField);
-        e.target.reset();
-    };
+    const handleAddPost = async (formData, {reset}) => {
+        const {fieldText} = formData;
+        if (!fieldText) return
 
-    return (<AddNewTextForm onSubmit={addPost} {...props}/>)
-
-    // const {register, handleSubmit, errors} = useForm({
-    //     mode: "onBlur",
-    // })
-    //
-    // return (
-    //     <form onSubmit={handleSubmit(addPost)}>
-    //         <textarea name={'postField'} ref={register} {...props}/>
-    //         <button type={'submit'}>public</button>
-    //     </form>
-    // )
-}
-
-const AddPost = (props) => {
+        const newPost = await addPost(fieldText);
+        reset(newPost);
+    }
 
     return (
         <styles.AddPost>
-            <div>Add post</div>
-            <AddPostForm {...props}/>
+            <Typography variant={'h4'}>Add post</Typography>
+            <Form submitFunction={handleAddPost} inputComponent={TextArea} flexFlow={'row nowrap'}>
+                {[
+                    {name: 'fieldText'}
+                ]}
+                <button type={'submit'}>post</button>
+            </Form>
         </styles.AddPost>
     );
 };

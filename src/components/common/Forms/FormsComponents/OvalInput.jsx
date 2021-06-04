@@ -1,12 +1,14 @@
 import React, {forwardRef} from 'react';
-import {makeStyles} from "@material-ui/core";
+import {makeStyles, Typography} from "@material-ui/core";
 import Input from "./Input";
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        flexFlow: 'column',
         justifyContent: 'center',
+        alignItems: 'center',
         width: '100%',
     },
     input: {
@@ -31,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
             width: '95%',
             height: '10vh',
         }
-
     },
 }))
 
@@ -41,6 +42,7 @@ const OvalInput = forwardRef((props, ref) => {
     return (
         <div className={styles.root}>
             <input className={styles.input} placeholder={props.label} ref={ref} {...props}/>
+            {props.error && <Typography color={'error'} variant={'p'}>{props.helperText}</Typography>}
         </div>
     );
 });

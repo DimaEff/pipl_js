@@ -14,11 +14,11 @@ const MyPosts = (props) => {
 
     return (
         <styles.MyPosts>
-            {/*<AddPost*/}
-            {/*    postField={props.postField}*/}
-            {/*    addPost={props.addPost}*/}
-            {/*    updatePostField={props.updatePostField}*/}
-            {/*/>*/}
+            <AddPost
+                postField={props.postField}
+                addPost={props.addPost}
+                updatePostField={props.updatePostField}
+            />
             My posts
             <div>
                 { posts }

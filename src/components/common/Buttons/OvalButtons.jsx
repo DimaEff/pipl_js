@@ -1,8 +1,20 @@
 import React from 'react';
-import {Button} from "@material-ui/core";
+import {Button, makeStyles, Typography} from "@material-ui/core";
 
+
+const useStyles = makeStyles((theme) => ({
+    buttonName: props => ({
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        // Проблемы с размерами кнопок в группе при использовании
+        // Поэтому пока 18 пикселей
+        fontSize: props.fontSize || '18px',
+    })
+}))
 
 const OvalButtons = ({children, ...props}) => {
+    const styles = useStyles();
 
     return (
         <div>
@@ -14,7 +26,7 @@ const OvalButtons = ({children, ...props}) => {
                             onClick={button.action}
                             {...props}
                     >
-                        {button.name}
+                        <Typography className={styles.buttonName}>{button.name}</Typography>
                     </Button>
                 )
             )}

@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react';
 import {makeStyles} from "@material-ui/core";
+import Input from "./Input";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,14 +35,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-const MyLoginInput = forwardRef((props, ref) => {
+const OvalInput = forwardRef((props, ref) => {
     const styles = useStyles();
 
     return (
         <div className={styles.root}>
-            <input className={styles.input} ref={ref} {...props}/>
+            <input className={styles.input} placeholder={props.label} ref={ref} {...props}/>
         </div>
     );
 });
 
-export default MyLoginInput;
+
+export default OvalInput;

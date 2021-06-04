@@ -1,18 +1,16 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {useForm} from "react-hook-form";
-import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {Redirect} from "react-router-dom";
-import {Container, makeStyles, Typography} from "@material-ui/core";
+import {Container, makeStyles} from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 
 import {logIn, logOut} from "../../Redux/auth_reducer";
 import Form from "../common/Forms/FormsComponents/Form";
 import piplImg from '../../assets/images/pipl.jpg'
-import MyLoginInput from "../common/Forms/FormsComponents/MyLoginInput";
-import MultipleButton from "../common/Buttons/MultipleButton";
+import OvalButtons from "../common/Buttons/OvalButtons";
 import {getIsAuth} from "../../selectors/auth_selectors";
+import OvalInput from "../common/Forms/FormsComponents/OvalInput";
 
 
 const schema = yup.object().shape({
@@ -67,19 +65,14 @@ const useStyles = makeStyles((theme) => ({
 const LoginForm = (props) => {
     const styles = useStyles();
 
-    const {register, handleSubmit, formState: {errors}, setError} = useForm({
-        mode: "onBlur",
-        resolver: yupResolver(schema),
-    })
+    const login = async (formData) => {
+        const promise = props.logIn(formData.email, formData.password);
+        // const response = await Promise.all([promise]);
 
-    const login = async (data) => {
-        const promise = props.logIn(data.email, data.password);
-        const response = await Promise.all([promise]);
-
-        setError("email", {
-            type: "manual",
-            message: response,
-        })
+        // setError("email", {
+        //     type: "manual",
+        //     message: response,
+        // })
     }
 
     const registration = () => {
@@ -89,18 +82,18 @@ const LoginForm = (props) => {
     return (
         <Container className={styles.form} maxWidth={'xs'}>
             <div className={styles.logo}>pipl</div>
-            <Form column onSubmit={handleSubmit(login)}>
-                <MyLoginInput type={'text'} placeholder={'email'} error={!!errors.email}
-                              helperText={errors.email?.message} {...register('email')}/>
-                {errors.email && <span className={styles.error}>{errors.email.message}</span>}
-                <MyLoginInput type={'password'} placeholder={'password'}
-                              error={!!errors.password} helperText={errors.password?.message} {...register('password')}/>
-                <MultipleButton>
+            <Form schema={schema} onSubmit={login} inputComponent={OvalInput}>
+                {[
+                    {name: 'email'},
+                    {name: 'password', type: 'password'},
+                ]}
+                <OvalButtons>
                     {[
-                        [<Typography variant={'h5'}>pipin</Typography>, login],
-                        [<AddIcon fontSize={'default'} color={'primary'}/>, registration],
+                    {name: 'pipin', type: 'submit'},
+                    {name: <AddIcon fontSize={'default'} color={'primary'}/>, action: registration},
                     ]}
-                </MultipleButton>
+                </OvalButtons>
+                {/*<button type={'submit'}>login</button>*/}
             </Form>
         </Container>
     )

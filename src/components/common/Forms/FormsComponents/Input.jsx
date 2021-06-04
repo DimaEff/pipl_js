@@ -10,9 +10,17 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Input = forwardRef((props, ref) => {
-    const styles = useStyles();
 
-    return <TextField className={styles.root} variant={'filled'} inputRef={ref} {...props}/>
-})
+    return <TextField
+        fullWidth
+        color={'primary'}
+        variant={'filled'}
+        margin={'normal'}
+        inputRef={ref}
+        {...props}
+    />
+});
+
+
 
 export default Input;

@@ -2,7 +2,8 @@ import React from 'react';
 
 import styles from './MyPostsStyles'
 import Post from "./Post/Post";
-import AddPost from "./AddPost/AddPost";
+import AddForm from "../../common/Forms/AddForm";
+import {Typography} from "@material-ui/core";
 
 
 const MyPosts = (props) => {
@@ -14,12 +15,8 @@ const MyPosts = (props) => {
 
     return (
         <styles.MyPosts>
-            <AddPost
-                postField={props.postField}
-                addPost={props.addPost}
-                updatePostField={props.updatePostField}
-            />
-            My posts
+            <AddForm addFunction={props.addPost} submitButtonName={'post'} formName={'Add post'}/>
+            <Typography variant={'h4'}>My posts</Typography>
             <div>
                 { posts }
             </div>

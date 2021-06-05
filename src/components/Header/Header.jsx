@@ -1,9 +1,8 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 
-
 import styles from "./HeaderStyles";
-import PrimaryButton from "../common/Buttons/PrimaryButton";
+import Buttons from "../common/Buttons/Buttons";
 
 
 const Header = (props) => {
@@ -14,7 +13,7 @@ const Header = (props) => {
                 {props.isAuth ?
                     <>
                         <NavLink to={`/profile/${props.userId}`}>{props.login}</NavLink>
-                        <PrimaryButton onClick={() => props.logOut()}>Logout</PrimaryButton>
+                        <Buttons>{[{name: 'logout', action: props.logOut}]}</Buttons>
                     </>:
                     <NavLink to={'/login'}>Login</NavLink>}
             </div>

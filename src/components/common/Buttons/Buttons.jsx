@@ -7,21 +7,21 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        // Проблемы с размерами кнопок в группе при использовании
+        // Проблемы с размерами кнопок в группе при использовании иконок
         // Поэтому пока 18 пикселей
         fontSize: props.fontSize || '18px',
     })
 }))
 
-const OvalButtons = ({children, ...props}) => {
+const Buttons = ({children, variant, color, ...props}) => {
     const styles = useStyles();
 
     return (
         <div>
             {children.map((button) => (
                     <Button key={button.name}
-                            variant="contained"
-                            color="primary"
+                            variant={variant || "contained"}
+                            color={color || "primary"}
                             type={button.type || 'button'}
                             onClick={button.action}
                             {...props}
@@ -34,4 +34,4 @@ const OvalButtons = ({children, ...props}) => {
     );
 };
 
-export default OvalButtons;
+export default Buttons;

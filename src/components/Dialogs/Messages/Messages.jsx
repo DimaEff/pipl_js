@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from "./MessagesStyles";
 import Message from "./Message/Message";
-import AddMessage from "./AddMessage/AddMessage";
+import AddForm from "../../common/Forms/AddForm";
 
 
 const Messages = (props) => {
@@ -13,7 +13,7 @@ const Messages = (props) => {
     return (
         <styles.Messages>
             { messages }
-            <AddMessage addMessage={props.addMessage}/>
+            <AddForm addFunction={props.addMessage} submitButtonName={'send'}/>
         </styles.Messages>
     );
 }

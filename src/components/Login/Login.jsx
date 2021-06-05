@@ -8,7 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 import {logIn, logOut} from "../../Redux/auth_reducer";
 import Form from "../common/Forms/Form";
 import piplImg from '../../assets/images/pipl.jpg'
-import OvalButtons from "../common/Buttons/OvalButtons";
+import Buttons from "../common/Buttons/Buttons";
 import {getIsAuth} from "../../selectors/auth_selectors";
 import OvalInput from "../common/Forms/FormsComponents/OvalInput";
 
@@ -70,7 +70,7 @@ const LoginForm = (props) => {
 
         setError("password", {
             type: "manual",
-            message: response[0],
+            message: response?.[0],
         })
     }
 
@@ -87,12 +87,12 @@ const LoginForm = (props) => {
                     {name: 'password', type: 'password'},
                 ]}
                 <ButtonGroup variant="contained" color="primary">
-                    <OvalButtons>
+                    <Buttons>
                         {[
                             {name: 'pipin', type: 'submit'},
                             {name: <AddIcon color={'primary'}/>, action: registration},
                         ]}
-                    </OvalButtons>
+                    </Buttons>
                 </ButtonGroup>
             </Form>
         </Container>

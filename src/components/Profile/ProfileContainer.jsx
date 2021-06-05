@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {useParams} from "react-router";
-import {Redirect, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 import Profile from "./Profile";
 import {addPost, getUserProfile, getUserStatus, updateUserStatus} from "../../Redux/profile_reducer";

@@ -1,4 +1,4 @@
-import styled, {createGlobalStyle} from "styled-components";
+import {createGlobalStyle} from "styled-components";
 import {createMuiTheme} from "@material-ui/core";
 
 
@@ -15,8 +15,9 @@ const theme = createMuiTheme({
             main: '#3914AF'
         },
         secondary: {
-            main: '#00A287',
+            main: 'rgba(255, 255, 255, 0.2)',
         },
+
     },
     typography: {
         fontSize: '15',

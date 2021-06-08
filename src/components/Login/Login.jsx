@@ -21,7 +21,6 @@ const schema = yup.object().shape({
 const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
-        resize: 'both',
         overflow: 'hidden', /* Для интерактивного изменения размера. Необязательно */
         backgroundSize: 'cover',
         backgroundImage: `url(${piplImg})`,

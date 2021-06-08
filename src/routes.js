@@ -18,13 +18,13 @@ import Home from "./components/Home/Home";
 
 const appRoutes = [
     {
+        path: getLoginRoute(),
+        Component: Login,
+    },
+    {
         path: getHomeRoute(),
         Component: Home,
         exact: true,
-    },
-    {
-        path: getLoginRoute(),
-        Component: Login,
     },
     {
         path: getProfileRoute(),

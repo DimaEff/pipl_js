@@ -4,9 +4,7 @@ import {useLocation} from "react-router";
 import {Container, makeStyles} from "@material-ui/core";
 
 
-// import styles from "./AppStyles";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import NavbarContainer from "./components/Navbar/NavbarContainer";
 import {initialize} from "./Redux/app_reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import AppRouter from "./AppRouter";
@@ -16,6 +14,7 @@ import mainImg from './assets/images/konfeti.jpg'
 
 
 const useStyles = makeStyles(theme => ({
+    // Пока не знаю, хочу ли какой-то задний фон, но стили пусть будут
     background: {
         position: 'fixed',
         minHeight: '100vh',
@@ -51,10 +50,9 @@ const App = ({initialize, initialized}) => {
 
     return (
         <>
-            <div className={styles.background}/>
+            {/*<div className={styles.background}/>*/}
             <Container maxWidth={"lg"} className={styles.wrapper}>
                 <HeaderContainer/>
-                <NavbarContainer/>
                 <div>
                     <AppRouter/>
                 </div>

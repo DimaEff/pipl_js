@@ -25,6 +25,7 @@
     "reselect": "^4.0.0",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4",
+    "yarn": "^1.22.10",
     "yup": "^0.32.9"
   },
   "scripts": {

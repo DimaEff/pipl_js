@@ -11,6 +11,7 @@ import AppRouter from "./AppRouter";
 import {getLoginRoute} from "./utils/consts";
 import Login from "./components/Login/Login";
 import mainImg from './assets/images/konfeti.jpg'
+import appRoutes from "./routes";
 
 
 const useStyles = makeStyles(theme => ({
@@ -54,7 +55,7 @@ const App = ({initialize, initialized}) => {
             <Container maxWidth={"lg"} className={styles.wrapper}>
                 <HeaderContainer/>
                 <div>
-                    <AppRouter/>
+                    <AppRouter routes={appRoutes}/>
                 </div>
             </Container>
         </>

@@ -1,19 +1,20 @@
+import React from "react";
+
 import {
     getDialogsRoute,
     getProfileRoute,
     getLoginRoute,
     getUsersRoute,
-    getNewsRoute,
     getMusicRoute, getSettingsRoute, getHomeRoute
 } from "./utils/consts";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import Login from "./components/Login/Login";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersContainer from "./components/Users/UsersContainer";
-import News from "./components/News/News";
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
 import Home from "./components/Home/Home";
+
+const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
+const Music = React.lazy(() => import("./components/Music/Music"));
+const Settings = React.lazy(() => import("./components/Settings/Settings"));
 
 
 const appRoutes = [
@@ -39,16 +40,17 @@ const appRoutes = [
     {
         path: getUsersRoute(),
         Component: UsersContainer,
+        lazyLoading: true,
     },
     {
-        path: getNewsRoute(),
-        Component: News,
-    },{
         path: getMusicRoute(),
         Component: Music,
-    },{
+        lazyLoading: true,
+    },
+    {
         path: getSettingsRoute(),
         Component: Settings,
+        lazyLoading: true,
     },
 ];
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import * as styles from './UsersStyles';
 import User from "./User/User";
@@ -20,23 +20,14 @@ let Users = (props) => {
                            onToggleFollow={props.onToggleFollow}
         />);
 
-    // const followedUsers = React.lazy(() => {
-    //     props.followedUsers
-    //         .map(user => <User key={user.id}
-    //                            {...user}
-    //                            isAuth={props.isAuth}
-    //                            followingUsersInProcess={props.followingUsersInProcess}
-    //                            onToggleFollow={props.onToggleFollow}
-    //         />)
-    // })
-
     return (
         <styles.Users>
             <styles.Pages>
                 <div onClick={props.onPreviousUpdateCurrentPage}>{'<'}</div>
                 {pages.map((page) => {
                     return (
-                        <styles.Page onClick={(event) => props.onUpdateCurrentPage(page)}
+                        <styles.Page key={page}
+                                     onClick={() => props.onUpdateCurrentPage(page)}
                                      currentPage={page === props.currentPage ? '1' : ''}>
                             {page}
                         </styles.Page>

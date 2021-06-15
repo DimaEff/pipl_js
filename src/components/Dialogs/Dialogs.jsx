@@ -1,3 +1,5 @@
+import React from 'react';
+
 import styles from './DialogsStyles'
 import Users from "./Users/Users";
 import Messages from "./Messages/Messages";

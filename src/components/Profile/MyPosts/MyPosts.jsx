@@ -6,23 +6,20 @@ import AddForm from "../../common/Forms/AddForm";
 import {Typography} from "@material-ui/core";
 
 
-const MyPosts = (props) => {
+const MyPosts = ({posts, addPost}) => {
 
-    let posts = props.posts
+    const myPosts = posts
         .map(post => <Post key={post.id} message={post.message} likeCount={post.likeCount}/>);
-
-    console.log('render MyPost')
 
     return (
         <styles.MyPosts>
-            <AddForm addFunction={props.addPost} submitButtonName={'post'} formName={'Add post'}/>
+            <AddForm addFunction={addPost} submitButtonName={'post'} formName={'Add post'}/>
             <Typography variant={'h4'}>My posts</Typography>
             <div>
-                { posts }
+                {myPosts}
             </div>
         </styles.MyPosts>
     );
 }
 
-// Использую данную оптимизацияю скорее в учебных целях
-export default React.memo(MyPosts);
+export default MyPosts;

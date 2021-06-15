@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
 
@@ -16,54 +16,51 @@ import {
 import {getIsAuth} from "../../selectors/auth_selectors";
 
 
-class UsersContainer extends React.Component {
+const UsersContainer = (props) => {
 
-    componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    useEffect(() => {
+        props.getUsers(props.currentPage, props.pageSize);
+    }, [props.currentPage, props.pageSize, props.getUsers])
+
+    const onUpdateCurrentPage = (currentPage) => {
+        props.getUsers(currentPage, props.pageSize);
     }
 
-    onUpdateCurrentPage = (currentPage) => {
-        this.props.getUsers(currentPage, this.props.pageSize);
-    }
-
-    onPreviousUpdateCurrentPage = () => {
-        let previousCurrentPage = this.props.currentPage - 1;
-        if (this.props.currentPage !== 1) {
-            this.props.getUsers(previousCurrentPage, this.props.pageSize);
+    const onPreviousUpdateCurrentPage = () => {
+        let previousCurrentPage = props.currentPage - 1;
+        if (props.currentPage !== 1) {
+            props.getUsers(previousCurrentPage, props.pageSize);
         }
     }
 
-    onNextUpdateCurrentPage = () => {
-        let nextCurrentPage = this.props.currentPage + 1;
-        let lastPage = this.props.totalUsersCount > 50 ? 10 : Math.ceil(this.props.totalUsersCount / this.props.pageSize);
-        if (this.props.currentPage !== lastPage) {
-            this.props.getUsers(nextCurrentPage, this.props.pageSize);
+    const onNextUpdateCurrentPage = () => {
+        let nextCurrentPage = props.currentPage + 1;
+        let lastPage = props.totalUsersCount > 50 ? 10 : Math.ceil(props.totalUsersCount / props.pageSize);
+        if (props.currentPage !== lastPage) {
+            props.getUsers(nextCurrentPage, props.pageSize);
         }
     }
 
-    onToggleFollow = (userId, isFollowed) => {
-        this.props.toggleFollow(userId, isFollowed);
+    const onToggleFollow = (userId, isFollowed) => {
+        props.toggleFollow(userId, isFollowed);
     }
 
-    render() {
-        return (
-            <>
-                {this.props.isFetching ?
-                    <Preloader/> :
-                    <Users {...this.props}
-                           onToggleFollow={this.onToggleFollow}
-                           onUpdateCurrentPage={this.onUpdateCurrentPage}
-                           onPreviousUpdateCurrentPage={this.onPreviousUpdateCurrentPage}
-                           onNextUpdateCurrentPage={this.onNextUpdateCurrentPage}
-                    />
-                }
-            </>
-        )
-    }
+    return (
+        <>
+            {props.isFetching ?
+                <Preloader/> :
+                <Users {...props}
+                       onToggleFollow={onToggleFollow}
+                       onUpdateCurrentPage={onUpdateCurrentPage}
+                       onPreviousUpdateCurrentPage={onPreviousUpdateCurrentPage}
+                       onNextUpdateCurrentPage={onNextUpdateCurrentPage}
+                />
+            }
+        </>
+    )
 }
 
-let mapStateToProps = (state) => {
-    return {
+let mapStateToProps = (state) => ({
         users: getAllUsers(state),
         totalUsersCount: getTotalUsersCount(state),
         pageSize: getPageSize(state),
@@ -72,8 +69,8 @@ let mapStateToProps = (state) => {
         followingUsersInProcess: getFollowingUsersInProcess(state),
         isAuth: getIsAuth(state),
     }
-}
+)
 
 export default compose(
     connect(mapStateToProps, {getUsers, toggleFollow}),
-)(UsersContainer)
+)(UsersContainer);

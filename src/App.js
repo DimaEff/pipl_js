@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
-import {useLocation} from "react-router";
+import {useLocation} from "react-router-dom";
 import {Container, makeStyles} from "@material-ui/core";
 
 
@@ -18,9 +18,9 @@ const useStyles = makeStyles(theme => ({
     // Пока не знаю, хочу ли какой-то задний фон, но стили пусть будут
     background: {
         position: 'fixed',
+        top: '0',
         minHeight: '100vh',
         minWidth: '100vw',
-        top: '0',
         // На счет картинки еще очень не уверен
         backgroundImage: `url(${mainImg})`,
         backgroundSize: 'cover',
@@ -44,7 +44,7 @@ const App = ({initialize, initialized}) => {
 
     if (!initialized) return <Preloader/>
     // Я пока не придумал нормального варианта внедрить возможность
-    // Отрисовывать некоторые пути не в styles.Content.
+    // Отрисовывать некоторые пути без хэдера и т.п.
     // Поэтому, login пока тут
     if (pathname === getLoginRoute()) return <Login/>
 

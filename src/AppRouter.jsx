@@ -1,35 +1,34 @@
-import React, {Suspense} from 'react';
-import {Switch, Route, Redirect} from "react-router";
+import React from 'react';
+import {Switch, Route, Redirect} from "react-router-dom";
 
 import withAuthRedirect from "./hoc/withAuthRedirect";
+import withSuspense from "./hoc/withSuspense";
 
 
-const AppRouter = ({routes, redirectPath = '/', fallbackElement = <div>Loading...</div>}) => {
+const AppRouter = ({routes, redirectPath = '/', fallbackElement}) => {
 
     return (
         <Switch>
             {routes.map(route => {
                 if (route.lazyLoading) {
+                    let LazyComponent = withSuspense(route.Component, fallbackElement);
+                    if (route.withAuth) LazyComponent = withAuthRedirect(LazyComponent);
+
                     return <Route
+                        key={route.path}
                         exact={route.exact}
                         path={route.path}
-                        render={() => (
-                            <Suspense fallback={fallbackElement}>
-                                {route.withAuth ?
-                                    withAuthRedirect(route.Component):
-                                    <route.Component />
-                                }
-                            </Suspense>
-                        )}/>
+                        component={LazyComponent}/>
 
                 } else if (route.withAuth) {
                     return <Route
+                        key={route.path}
                         exact={route.exact}
                         path={route.path}
                         component={withAuthRedirect(route.Component)}/>
                 }
 
-                return <Route exact={route.exact} path={route.path} component={route.Component}/>
+                return <Route key={route.path} exact={route.exact} path={route.path} component={route.Component}/>
             })}
 
             <Redirect to={redirectPath}/>

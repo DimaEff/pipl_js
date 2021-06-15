@@ -19,9 +19,7 @@ const Profile = (props) => {
                          updateUserStatus={props.updateUserStatus}
             />
             <MyPosts posts={props.posts}
-                     postField={props.postField}
                      addPost={props.addPost}
-                     updatePostField={props.updatePostField}
             />
         </styles.Profile>
     );

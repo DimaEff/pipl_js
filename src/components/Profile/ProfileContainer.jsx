@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
-import {compose} from "redux";
-import {useParams} from "react-router";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 
 import Profile from "./Profile";
 import {addPost, getUserProfile, getUserStatus, updateUserStatus} from "../../Redux/profile_reducer";
-import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {getPosts, getProfile, getUserStatusFromState} from "../../selectors/profile_selector";
 import {getIsAuth, getMyInformation} from "../../selectors/auth_selectors";
 import {getProfileRoute} from "../../utils/consts";
@@ -46,12 +43,11 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default compose(
-    withAuthRedirect,
-    connect(mapStateToProps, {
+export default connect(mapStateToProps,
+    {
         addPost,
         getUserProfile,
         getUserStatus,
         updateUserStatus,
-    })
+}
 )(ProfileContainer);

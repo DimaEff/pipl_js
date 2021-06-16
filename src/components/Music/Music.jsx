@@ -1,8 +1,11 @@
 import React from 'react';
-import styles from "./Music.module";
+
+import styles from "./MusicStyles";
 
 
 const Music = () => {
+    console.log('Music');
+
     return (
         <styles.Music>
             Music

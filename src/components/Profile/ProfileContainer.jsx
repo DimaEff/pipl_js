@@ -16,38 +16,29 @@ let ProfileContainer = (props) => {
 
     useEffect(() => {
         if (!userId) history.push(getProfileRoute(props.myUserId))
-        props.getUserProfile(userId);
-        props.getUserStatus(userId);
-    }, [userId, props.myUserId])
+    })
 
     useEffect(() => {
-        if (userId == props.myUserId) {
-            setIsMyProfile(true);
-        } else  {
-            setIsMyProfile(false);
-        }
+        if (!userId) return
+        props.getUserProfile(userId);
+        props.getUserStatus(userId);
+    }, [userId])
+
+    useEffect(() => {
+        userId == props.myUserId ? setIsMyProfile(true): setIsMyProfile(false);
     }, [userId, props.myUserId, setIsMyProfile]);
 
 
     return <Profile isMyProfile={isMyProfile} {...props}/>
 }
 
-let mapStateToProps = (state) => {
-    return {
-        profile: getProfile(state),
-        posts: getPosts(state),
-        myUserId: getMyInformation(state).userId,
-        isLogin: getIsAuth(state),
-        initialized: state.app.initialized,
-        status: getUserStatusFromState(state),
-    }
-}
+const mapStateToProps = (state) => ({
+    profile: getProfile(state),
+    posts: getPosts(state),
+    myUserId: getMyInformation(state).userId,
+    isLogin: getIsAuth(state),
+    initialized: state.app.initialized,
+    status: getUserStatusFromState(state),
+})
 
-export default connect(mapStateToProps,
-    {
-        addPost,
-        getUserProfile,
-        getUserStatus,
-        updateUserStatus,
-}
-)(ProfileContainer);
+export default connect(mapStateToProps, {addPost, getUserProfile, getUserStatus, updateUserStatus,})(ProfileContainer);

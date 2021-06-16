@@ -6,29 +6,23 @@ import withSuspense from "./hoc/withSuspense";
 
 
 const AppRouter = ({routes, redirectPath = '/', fallbackElement}) => {
+    const getRoute = (path, exact, component) => <Route key={path} exact={exact} path={path} component={component}/>
 
     return (
         <Switch>
             {routes.map(route => {
+                let component = route.Component;
+
                 if (route.lazyLoading) {
-                    let LazyComponent = withSuspense(route.Component, fallbackElement);
-                    if (route.withAuth) LazyComponent = withAuthRedirect(LazyComponent);
-
-                    return <Route
-                        key={route.path}
-                        exact={route.exact}
-                        path={route.path}
-                        component={LazyComponent}/>
-
-                } else if (route.withAuth) {
-                    return <Route
-                        key={route.path}
-                        exact={route.exact}
-                        path={route.path}
-                        component={withAuthRedirect(route.Component)}/>
+                    component = withSuspense(route.Component, fallbackElement);
+                    if (route.withAuth) component = withAuthRedirect(component);
                 }
 
-                return <Route key={route.path} exact={route.exact} path={route.path} component={route.Component}/>
+                if (route.withAuth) {
+                    component = withAuthRedirect(route.Component)
+                }
+
+                return getRoute(route.path, route.exact, component);
             })}
 
             <Redirect to={redirectPath}/>
@@ -36,4 +30,5 @@ const AppRouter = ({routes, redirectPath = '/', fallbackElement}) => {
     );
 };
 
-export default AppRouter;
+// Без React.memo все ломается(начинаются цикличные загрузки и запросы к серверу у <Profile/Users>Container)
+export default React.memo(AppRouter);

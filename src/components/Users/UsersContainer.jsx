@@ -73,4 +73,5 @@ let mapStateToProps = (state) => ({
 
 export default compose(
     connect(mapStateToProps, {getUsers, toggleFollow}),
+    React.memo,
 )(UsersContainer);

@@ -13,14 +13,8 @@ const AppRouter = ({routes, redirectPath = '/', fallbackElement}) => {
             {routes.map(route => {
                 let component = route.Component;
 
-                if (route.lazyLoading) {
-                    component = withSuspense(route.Component, fallbackElement);
-                    if (route.withAuth) component = withAuthRedirect(component);
-                }
-
-                if (route.withAuth) {
-                    component = withAuthRedirect(route.Component)
-                }
+                if (route.lazyLoading) component = withSuspense(component, fallbackElement);
+                if (route.withAuth) component = withAuthRedirect(component);
 
                 return getRoute(route.path, route.exact, component);
             })}

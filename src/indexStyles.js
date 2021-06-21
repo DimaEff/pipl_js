@@ -42,7 +42,7 @@ theme.overrides = {
         root: {
             borderRadius: '30px',
         }
-    }
+    },
 }
 
 export default theme;

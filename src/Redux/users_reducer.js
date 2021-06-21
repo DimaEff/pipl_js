@@ -4,20 +4,20 @@ import {usersAPI} from "../api/api";
 const TOGGLE_FOLLOW = 'users/TOGGLE_FOLLOW';
 const SET_USERS = 'users/SET_USERS';
 const SET_TOTAL_USERS_COUNT = 'users/SET_TOTAL_USERS_COUNT';
-const UPDATE_CURRENT_PAGE = 'users/UPDATE_CURRENT_PAGE';
+// const UPDATE_CURRENT_PAGE = 'users/UPDATE_CURRENT_PAGE';
 const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING_USER = 'users/TOGGLE_IS_FOLLOWING_USER';
 
-let initialState = {
+const initialState = {
     users: [],
     totalUsersCount: 0,
-    pageSize: 5,
+    pageSize: 10,
     currentPage: 1,
     isFetching: false,
     followingUsersInProcess: [],
 }
 
-let usersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case TOGGLE_FOLLOW:
             return {
@@ -29,7 +29,7 @@ let usersReducer = (state = initialState, action) => {
         case  SET_USERS:
             return {
                 ...state,
-                users: [...action.users],
+                users: [...state.users, ...action.users],
             }
 
         case  SET_TOTAL_USERS_COUNT:
@@ -38,11 +38,11 @@ let usersReducer = (state = initialState, action) => {
                 totalUsersCount: action.totalUsersCount,
             }
 
-        case  UPDATE_CURRENT_PAGE:
-            return {
-                ...state,
-                currentPage: action.currentPage,
-            }
+        // case  UPDATE_CURRENT_PAGE:
+        //     return {
+        //         ...state,
+        //         currentPage: action.currentPage,
+        //     }
 
         case TOGGLE_IS_FETCHING:
             return {
@@ -65,7 +65,7 @@ let usersReducer = (state = initialState, action) => {
 
 export const getUsers = (currentPage, pageSize) => async (dispatch) => {
     dispatch(toggleIsFetching(true));
-    dispatch(updateCurrentPage(currentPage));
+    // dispatch(updateCurrentPage(currentPage));
 
     const data = await usersAPI.getUsers(currentPage, pageSize);
     dispatch(setUsers(data.items));
@@ -84,7 +84,7 @@ export const toggleFollow = (userId, isFollowed) => async (dispatch) => {
 export const toggleFollowAC = (userId) => ({type: TOGGLE_FOLLOW, userId});
 export const setUsers = (users) => ({type: SET_USERS, users});
 export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
-export const updateCurrentPage = (currentPage) => ({type: UPDATE_CURRENT_PAGE, currentPage});
+// export const updateCurrentPage = (currentPage) => ({type: UPDATE_CURRENT_PAGE, currentPage});
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const toggleIsFollowingUser = (isFetching, userId) => ({type: TOGGLE_IS_FOLLOWING_USER, isFetching, userId});
 

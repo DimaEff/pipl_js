@@ -5,6 +5,7 @@ import {makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     link: {
+        display: 'flex',
         outline: 'none',
         textDecoration: 'none',
     }

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 import * as styles from './ProfileInfoStyles';
+import {Typography} from "@material-ui/core";
 
 
 const ProfileStatus = ({status, isMyProfile, updateUserStatus}) => {
@@ -28,7 +29,7 @@ const ProfileStatus = ({status, isMyProfile, updateUserStatus}) => {
                           onChange={onChangeStatusField}
                           onBlur={disableEditMode}
                 />:
-                <span onDoubleClick={activateEditMode}>{status || '-'.repeat(6)}</span>
+                <Typography variant={'subtitle1'} onDoubleClick={activateEditMode}>{status || '-'.repeat(6)}</Typography>
             }
         </styles.Status>
     );

@@ -21,13 +21,17 @@ const User = (props) => {
                         src={props.avatar}
                         imgSize={'80px'}
                         name={props.name}
+                        variant={'subtitle2'}
                         circle
                 />
-                {props.isAuth && <div>
-                    <button disabled={userInProgress()} onClick={onToggleFollow}>
-                        {props.followed ? 'Unfollow' : 'Follow'}
-                    </button>
-                </div>}
+                {
+                    props.isAuth &&
+                    <div>
+                        <button disabled={userInProgress()} onClick={onToggleFollow}>
+                            {props.followed ? 'Unfollow' : 'Follow'}
+                        </button>
+                    </div>
+                }
             </styles.AvatarNameButton>
             <styles.Description>
                 <div>

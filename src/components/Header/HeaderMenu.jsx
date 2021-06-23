@@ -56,6 +56,7 @@ const HeaderMenu = ({isAuth, logOut}) => {
             }
         </div>
     );
-};
+}
+;
 
 export default HeaderMenu;

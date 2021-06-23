@@ -1,13 +1,13 @@
 import React from 'react';
 
 import * as styles from './PreloaderStyles';
-import ball_preloader from '../../../assets/images/ball_preloader_transparent.svg'
+import circle_preloader from '../../../assets/images/circle_animate.svg'
 
 
 const Preloader = () => {
     return (
         <styles.Preloader>
-            <img src={ball_preloader} />
+            <img src={circle_preloader} />
         </styles.Preloader>
     );
 };

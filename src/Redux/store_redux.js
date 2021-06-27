@@ -7,6 +7,7 @@ import sidebarReducer from "./sidebar_reducer";
 import usersReducer from "./users_reducer";
 import authReducer from "./auth_reducer";
 import appReducer from "./app_reducer";
+import homeReducer from "./home_reducer";
 
 
 let reducers = combineReducers({
@@ -16,6 +17,7 @@ let reducers = combineReducers({
         sidebar: sidebarReducer,
         auth: authReducer,
         app: appReducer,
+        home: homeReducer,
     }
 )
 

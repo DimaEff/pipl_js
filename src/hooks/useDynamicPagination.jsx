@@ -1,25 +1,32 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 
 
 // Временный вариант реализации, пока не разберусь с ошибкой основного
 const useDynamicPagination = (requestFunction, totalCount, startPage = 1, limit = 10) => {
     const [isFetching, setIsFetching] = useState(true);
     const [currentPage, setCurrentPage] = useState(startPage);
-    const [pagesCount, setPagesCount] = useState(1000);
+    const [pagesCount, setPagesCount] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
             if (isFetching) {
                 await requestFunction(currentPage, limit);
-                setCurrentPage(p => p + 1)
+                setCurrentPage(p => p + 1);
+                setPagesCount(Math.ceil(totalCount / limit) || 3);
             }
             setIsFetching(false);
-            // setPagesCount(Math.ceil(totalCount / limit));
         }
         fetchData();
 
         // Знаю, что зависимости неправильные
     }, [isFetching])
+
+    const scrollHandler = useCallback((e) => {
+        const scrollPosition = e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight);
+        if (scrollPosition < 100 && currentPage < pagesCount) {
+            setIsFetching(true);
+        }
+    }, [pagesCount])
 
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler);
@@ -27,14 +34,7 @@ const useDynamicPagination = (requestFunction, totalCount, startPage = 1, limit 
         return () => {
             document.removeEventListener('scroll', scrollHandler)
         };
-    }, []);
-
-    const scrollHandler = (e) => {
-        const scrollPosition = e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight);
-        if (scrollPosition < 100 && currentPage < pagesCount) {
-            setIsFetching(true);
-        }
-    }
+    }, [scrollHandler]);
 
     return {isFetching};
 }

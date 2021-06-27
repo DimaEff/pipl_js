@@ -1,4 +1,4 @@
-import styles from "./User.module";
+import styles from "./UserStyles";
 import {Link} from "react-router-dom";
 
 const User = (props) => {

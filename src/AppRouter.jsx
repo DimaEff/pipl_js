@@ -6,7 +6,7 @@ import withSuspense from "./hoc/withSuspense";
 
 
 const AppRouter = ({routes, redirectPath = '/', fallbackElement}) => {
-    const getRoute = (path, exact, component) => <Route key={path} exact={exact} path={path} component={component}/>
+    const getRoute = (path, exact, component) => <Route key={path} exact={exact} path={path} component={component}/>;
 
     return (
         <Switch>

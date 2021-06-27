@@ -1,0 +1,1 @@
+export const getHomeNews = (state) => state.home.news;

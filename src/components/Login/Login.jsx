@@ -21,7 +21,7 @@ const schema = yup.object().shape({
 const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
-        overflow: 'hidden', /* Для интерактивного изменения размера. Необязательно */
+        overflow: 'hidden',
         backgroundSize: 'cover',
         backgroundImage: `url(${piplImg})`,
         display: 'flex',
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     },
     error: {
         color: 'red',
-    }
+    },
 }))
 
 const LoginForm = (props) => {
@@ -77,9 +77,18 @@ const LoginForm = (props) => {
         alert('Registration');
     }
 
+    const testLogin = () => {
+        props.logIn('fominienkovd@mail.ru', 'dimon2000fom1');
+    }
+
     return (
         <Container className={styles.form} maxWidth={'xs'}>
             <div className={styles.logo}>pipl</div>
+            <Buttons>
+                {[
+                    {name: 'test login', action: testLogin},
+                ]}
+            </Buttons>
             <Form schema={schema} submitFunction={login} inputComponent={OvalInput}>
                 {[
                     {name: 'email'},

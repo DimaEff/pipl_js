@@ -1,13 +1,19 @@
 import React from "react";
 
 import styles from "./UsersStyles";
-import User from "./User/User";
+import Avatar from "../../common/Avatar/Avatar";
 
 
 const Users = ({users}) => {
 
     const dialogsUsers = users
-        .map(user => <User key={user.id} avatar={user.avatar} username={user.username} id={user.id} />);
+        .map(user => <Avatar key={user.id}
+                             userId={user.id}
+                             src={user.avatar}
+                             imgSize={'70px'}
+                             name={user.username}
+                             variant={'subtitle1'}
+        />);
 
     return (
         <styles.Users>

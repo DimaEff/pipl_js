@@ -10,7 +10,7 @@ import {
 import ProfileContainer from './components/Profile/ProfileContainer';
 import Login from "./components/Login/Login";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import Home from "./components/Home/Home";
+import HomeContainer from "./components/Home/HomeContainer";
 
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
 const Music = React.lazy(() => import("./components/Music/Music"));
@@ -24,7 +24,7 @@ const appRoutes = [
     },
     {
         path: getHomeRoute(),
-        Component: Home,
+        Component: HomeContainer,
         exact: true,
     },
     {

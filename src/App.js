@@ -52,7 +52,7 @@ const App = ({initialize, initialized}) => {
     return (
         <>
             {/*<div className={styles.background}/>*/}
-            <Container maxWidth={"lg"} className={styles.wrapper}>
+            <Container maxWidth={"md"} className={styles.wrapper}>
                 <HeaderContainer/>
                 <div>
                     <AppRouter routes={appRoutes}/>

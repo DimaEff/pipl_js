@@ -1,1 +1,1 @@
-export const getHomeNews = (state) => state.home.news;
+export const getHomePosts = (state) => state.home.posts;

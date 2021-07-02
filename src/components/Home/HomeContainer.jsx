@@ -1,21 +1,21 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 
-import {getHomeNews} from "../../selectors/home_selectors";
-import {getNews} from "../../Redux/home_reducer";
+import {getHomePosts} from "../../selectors/home_selectors";
+import {getPosts} from "../../Redux/home_reducer";
 import Home from "./Home";
 
 
-const HomeContainer = ({news, getNews}) => {
+const HomeContainer = ({posts, getPosts}) => {
     useEffect(() => {
-        getNews(1, 6);
-    }, [getNews])
+        getPosts(1, 6);
+    }, [getPosts])
 
-    return <Home news={news}/>;
+    return <Home posts={posts}/>;
 };
 
 const mapStateToProps = (state) => ({
-    news: getHomeNews(state),
+    posts: getHomePosts(state),
 })
 
-export default connect(mapStateToProps, {getNews})(HomeContainer);
+export default connect(mapStateToProps, {getPosts})(HomeContainer);

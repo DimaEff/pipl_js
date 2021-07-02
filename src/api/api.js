@@ -59,7 +59,7 @@ export const profileAPI = {
 }
 
 export const homeAPI = {
-    async getNews(page, count) {
+    async getPosts(page, count) {
         const response = await unsplashInstanse.get(`https://api.unsplash.com/collections/206/photos?
         page=${page}&
         par_page=${count}&

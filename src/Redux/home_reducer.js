@@ -1,17 +1,17 @@
 import {homeAPI} from "../api/api";
 
-const  SET_NEWS = 'home_reducer/SET_NEWS';
+const  SET_POSTS = 'home_reducer/SET_POSTS';
 
 const initialState = {
-    news: [],
+    posts: [],
 };
 
 const homeReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_NEWS:
+        case SET_POSTS:
             return {
                 ...state,
-                news: [...state.news, ...action.payload],
+                posts: [...state.posts, ...action.payload],
             };
 
         default:
@@ -19,15 +19,16 @@ const homeReducer = (state = initialState, action) => {
     }
 }
 
-export const getNews = (page, count) => async (dispatch) => {
-    const response = await homeAPI.getNews(page, count);
+export const getPosts = (page, count) => async (dispatch) => {
+    const response = await homeAPI.getPosts(page, count);
     // Пока что так в тестовых целях.
-    const title = 'Test title';
-    const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur diam ac justo pulvinar, nec auctor tortor cursus. Quisque tempus ex quis iaculis elementum. Nulla sit amet ipsum auctor tortor feugiat convallis. Fusce sed nunc sed lacus ultricies maximus. Pellentesque non varius orci. Integer a nulla felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sit amet augue lobortis, facilisis lectus at, placerat mi. Proin vulputate tempus lacus et semper. Praesent pellentesque odio accumsan velit maximus vulputate. Nullam aliquet, massa vitae scelerisque rhoncus, sapien tellus vulputate lacus, ac ultrices elit leo sit amet odio';
-    const news = response.map(el => ({url: el.urls.regular, title, text}))
-    dispatch(setNews(news));
+    const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur diam ac justo pulvinar, nec auctor tortor cursus. Nullam consectetur diam ac justo pulvinar, nec auctor tortor cursus. Nullam consectetur diam ac justo pulvinar, nec auctor tortor cursus.';
+    const author = {name: 'DimaEff'};
+    const date = '29 June 2021';
+    const posts = response.map(el => ({url: el.urls.regular, text, author, date}))
+    dispatch(setPosts(posts));
 }
 
-const setNews = (payload) => ({type: SET_NEWS, payload});
+const setPosts = (payload) => ({type: SET_POSTS, payload});
 
 export default homeReducer;

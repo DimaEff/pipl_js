@@ -1,6 +1,6 @@
 import React from 'react';
-import {makeStyles, Typography} from "@material-ui/core";
-import NewsItem from "./NewsItem";
+import {Container, Grid, makeStyles, Typography} from "@material-ui/core";
+import PostItem from "./PostItem";
 
 
 const useStyles = makeStyles(theme => ({
@@ -10,20 +10,15 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const Home = ({news}) => {
-    const styles = useStyles();
-
-    const newsList = news.map(newsItem =>  <NewsItem className={styles.newsItem} newsItem={newsItem}/>)
+const Home = ({posts}) => {
+    const postList = posts.map(postItem => <Grid item lg={6} md={6} sm={9} xs={12}>
+        <PostItem postItem={postItem}/>
+    </Grid>)
 
     return (
-        <div>
-            <Typography variant={'h4'}>
-                Внешне пока что более менее оформлена только страница входа
-            </Typography>
-            <div>
-                {newsList}
-            </div>
-        </div>
+        <Grid justify={"center"} container spacing={2}>
+            {postList}
+        </Grid>
     );
 };
 

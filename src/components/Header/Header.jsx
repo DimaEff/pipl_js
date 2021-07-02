@@ -8,6 +8,7 @@ import HeaderMenu from "./HeaderMenu";
 
 const useStyles = makeStyles(theme => ({
     wrapper: {
+        zIndex: 1,
         position: 'fixed',
         display: 'flex',
         justifyContent: 'center',

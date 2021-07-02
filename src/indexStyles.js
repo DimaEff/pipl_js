@@ -28,7 +28,10 @@ const theme = createMuiTheme({
 theme.props = {
     MuiButton: {
         disableElevation: true,
-    }
+    },
+    MuiCard: {
+        elevation: 2,
+    },
 }
 
 theme.overrides = {
@@ -41,6 +44,19 @@ theme.overrides = {
     MuiButtonGroup: {
         root: {
             borderRadius: '30px',
+        }
+    },
+    MuiCard: {
+        root: {
+            borderRadius: '20px',
+        },
+
+    },
+    MuiCardMedia: {
+        root: {
+            marginLeft: '5px',
+            marginRight: '5px',
+            borderRadius: '20px',
         }
     }
 }

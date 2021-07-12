@@ -1,15 +1,15 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 
-import {getHomePosts} from "../../selectors/home_selectors";
+import {getHomePosts, getTotalCountPosts} from "../../selectors/home_selectors";
 import {getPosts} from "../../Redux/home_reducer";
 import Home from "./Home";
+import useDynamicPagination from "../../hooks/useDynamicPagination";
 
 
 const HomeContainer = ({posts, getPosts}) => {
-    useEffect(() => {
-        getPosts(1, 6);
-    }, [getPosts])
+    // Пока передаю 100 в качестве теста, т.к. в ответе unsplash нет данных о количестве фотографий
+    const {isFetching} = useDynamicPagination(getPosts, 100);
 
     return <Home posts={posts}/>;
 };

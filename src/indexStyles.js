@@ -46,6 +46,7 @@ theme.overrides = {
             borderRadius: '30px',
         }
     },
+
     MuiCard: {
         root: {
             borderRadius: '20px',
@@ -58,7 +59,20 @@ theme.overrides = {
             marginRight: '5px',
             borderRadius: '20px',
         }
-    }
-}
+    },
+
+    // MuiCollapse: {
+    //     entered: {
+    //         border: '1px solid red'
+    //     },
+    //     hidden: {
+    //         color: 'green',
+    //         border: '1px solid green'
+    //     },
+    //     wrapper: {
+    //         border: '1px solid blue',
+    //     }
+    // }
+};
 
 export default theme;

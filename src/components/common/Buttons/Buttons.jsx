@@ -26,7 +26,12 @@ const Buttons = ({children, variant, color, ...props}) => {
                             onClick={button.action}
                             {...props}
                     >
-                        <Typography className={styles.buttonName}>{button.name}</Typography>
+                        <Typography variant={props.typographyVariant}
+                                    color={props.typographyColor}
+                                    className={styles.buttonName}
+                        >
+                            {button.name}
+                        </Typography>
                     </Button>
                 )
             )}

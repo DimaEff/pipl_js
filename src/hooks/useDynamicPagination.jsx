@@ -36,7 +36,7 @@ const useDynamicPagination = (requestFunction, totalCount, startPage = 1, limit 
         };
     }, [scrollHandler]);
 
-    return {isFetching};
+    return {currentPage, isFetching};
 }
 
 // Почему-то функция scrollHandler запускается 3 раза при достижении низа страницы

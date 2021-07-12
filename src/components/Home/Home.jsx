@@ -1,17 +1,10 @@
 import React from 'react';
-import {Container, Grid, makeStyles, Typography} from "@material-ui/core";
-import PostItem from "./PostItem";
+import {Grid} from "@material-ui/core";
+import PostItem from "./PostItem/PostItem";
 
-
-const useStyles = makeStyles(theme => ({
-    newsItem: {
-        height: '100px',
-        // width: '200px',
-    }
-}))
 
 const Home = ({posts}) => {
-    const postList = posts.map(postItem => <Grid item lg={6} md={6} sm={9} xs={12}>
+    const postList = posts.map(postItem => <Grid item lg={9} md={9} sm={9} xs={12}>
         <PostItem postItem={postItem}/>
     </Grid>)
 

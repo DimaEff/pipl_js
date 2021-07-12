@@ -9,6 +9,7 @@ const instance = axios.create({
 });
 
 const unsplashInstanse = axios.create({
+    baseURL: 'https://api.unsplash.com/',
     headers: {
         'Authorization': 'Client-ID zkzaYmuSM7jN1qIGO5joAdc-iU2JDHKLJVZlVGv8VSQ',
     }
@@ -60,10 +61,7 @@ export const profileAPI = {
 
 export const homeAPI = {
     async getPosts(page, count) {
-        const response = await unsplashInstanse.get(`https://api.unsplash.com/collections/206/photos?
-        page=${page}&
-        par_page=${count}&
-        orientation=landscape`);
+        const response = await unsplashInstanse.get(`photos?page=${page}&per_page=${count}`);
         return response.data;
     }
 }

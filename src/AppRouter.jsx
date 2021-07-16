@@ -1,8 +1,8 @@
 import React from 'react';
 import {Switch, Route, Redirect} from "react-router-dom";
 
-import withAuthRedirect from "./hoc/withAuthRedirect";
-import withSuspense from "./hoc/withSuspense";
+import withAuthRedirect from "./hocs/withAuthRedirect";
+import withSuspense from "./hocs/withSuspense";
 
 
 const AppRouter = ({routes, redirectPath = '/', fallbackElement}) => {

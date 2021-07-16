@@ -28,7 +28,7 @@ export const getPosts = (page, count) => async (dispatch) => {
     // Пока что так в тестовых целях.
     const author = {name: 'DimaEff'};
     const date = '29 June 2021';
-    const posts = response.map(el => ({url: el.urls.regular, text: loremIpsum({count: 3}), author, date}));
+    const posts = response.map(el => ({url: el.urls.regular, text: loremIpsum({count: 4}), author, date}));
     dispatch(setPosts(posts));
 }
 

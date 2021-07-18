@@ -6,7 +6,7 @@ import AddForm from "../../common/Forms/AddForm";
 
 
 const Messages = (props) => {
-    let messages = props.messages
+    const messages = props.messages
         .map(message => message.userId !== 1 ? <Message other key={message.id} message={message.message}/>:
             <Message key={message.id} message={message.message}/>);
 

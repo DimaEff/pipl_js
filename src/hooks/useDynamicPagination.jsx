@@ -15,21 +15,22 @@ const useDynamicPagination = (requestFunction, totalCount, startPage = 1, limit 
         fetchData();
     }, [currentPage, limit, setIsFetching, requestFunction])
 
-    const scrollHandler = (e) => {;
-        const scrollPosition = e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight);
-        if (scrollPosition < 100 && currentPage < pagesCount) {
-            setCurrentPage(p => p + 1);
-            setPagesCount(Math.ceil(totalCount / limit));
-        }
-    }
-
     useEffect(() => {
+        const scrollHandler = (e) => {
+            const scrollPosition = e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight);
+            if (scrollPosition < 100 && currentPage < pagesCount) {
+                if (!isFetching) {
+                    setCurrentPage(p => p + 1);
+                    setPagesCount(Math.ceil(totalCount / limit));
+                }
+            }
+        }
         document.addEventListener('scroll', scrollHandler);
 
         return () => {
             document.removeEventListener('scroll', scrollHandler)
         };
-    }, [scrollHandler]);
+    }, [currentPage, limit, pagesCount, totalCount, isFetching]);
 
     return {isFetching};
 }

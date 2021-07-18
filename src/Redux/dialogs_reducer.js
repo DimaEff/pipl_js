@@ -21,7 +21,7 @@ let initialProfileState = {
 let dialogsReducer = (state = initialProfileState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
-            let newMessage = {
+            const newMessage = {
                 id: 1,
                 userId: 1,
                 message: action.message,

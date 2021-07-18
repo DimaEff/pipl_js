@@ -6,11 +6,9 @@ import Dialogs from "./Dialogs";
 import {getDialogsMessages, getDialogsUsers} from "../../selectors/dialogs_selectors";
 
 
-let mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) => ({
       users: getDialogsUsers(state),
       messages: getDialogsMessages(state),
-  }
-};
+});
 
 export default connect(mapStateToProps, {addMessage,})(Dialogs);

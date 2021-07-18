@@ -65,10 +65,10 @@ export const updateUserStatus = (status) => async (dispatch) => {
 }
 
 export const addPost = (newPostMessage) => (dispatch) => {
-    dispatch(addPostAC(newPostMessage));
+    dispatch(setPost(newPostMessage));
 }
 
-export const addPostAC = (newPostMessage) => ({type: ADD_POST, newPostMessage});
+export const setPost = (newPostMessage) => ({type: ADD_POST, newPostMessage});
 export const setUserProfile = (profile, status) => ({type: SET_USER_PROFILE, profile, status});
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
 

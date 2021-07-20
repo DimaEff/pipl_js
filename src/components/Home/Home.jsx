@@ -4,7 +4,7 @@ import PostItem from "./PostItem/PostItem";
 
 
 const Home = ({posts}) => {
-    const postList = posts.map(postItem => <Grid item lg={9} md={9} sm={9} xs={12}>
+    const postList = posts.map(postItem => <Grid key={postItem.url} item lg={9} md={9} sm={9} xs={12}>
         <PostItem postItem={postItem}/>
     </Grid>)
 
